@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button as VanButton } from 'vant'
-// import { userUserStore } from './stores'
-// const store = useUserStore()
+import { userUserStore } from './stores'
+const store = useUserStore()
 </script>
 
 <template>
