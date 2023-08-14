@@ -4,8 +4,9 @@ import { createPinia } from 'pinia'
 import presist from 'pinia-plugin-persistedstate'
 
 const pinia = createPinia()
-//use pinia plug-in
 pinia.use(presist)
+//use pinia plug-in
+
 
 export default pinia
 

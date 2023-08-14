@@ -6,6 +6,6 @@ import { Button as VanButton } from 'vant'
 
 <template>
   <div>App
-    <van-button>log in</van-button>
+    <van-button type="primary">log in</van-button>
   </div>
 </template>
