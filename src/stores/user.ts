@@ -1,5 +1,5 @@
 import type { User } from '@/types/user'
-import { defineStore } from 'pinia'
+import { createPinia, defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useUserStore = defineStore(
