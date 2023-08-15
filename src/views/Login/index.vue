@@ -44,6 +44,7 @@
 
 <template>
   <div class="login-page">Login</div>
+  <van-button>Log</van-button>
 </template>
 
 <style lang="scss" scoped>
