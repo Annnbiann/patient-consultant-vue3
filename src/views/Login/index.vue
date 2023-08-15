@@ -43,9 +43,12 @@
 </script>
 
 <template>
-  
-  <cp-nav-bar></cp-nav-bar>
-  <van-button>hi</van-button>
+  <div class="login-page">
+    <cp-nav-bar
+      right-text="Register"
+      @click-right="$router.push('/register')"
+    ></cp-nav-bar>
+  </div>
 </template>
 
 <style lang="scss" scoped>
