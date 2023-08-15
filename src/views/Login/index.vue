@@ -43,8 +43,9 @@
 </script>
 
 <template>
+  
+  <cp-nav-bar></cp-nav-bar>
   <div class="login-page">Login</div>
-  <van-button>Log</van-button>
 </template>
 
 <style lang="scss" scoped>
