@@ -27,19 +27,19 @@
 </script>
 
 <template>
-  <div class="cp-nav-bar">cp-nav-bar</div>
+  <van-nav-bar fixed left-arrow title="Login" right-text="register"></van-nav-bar>
 </template>
 
 <style lang="scss" scoped>
-// :deep() {
-//   .van-nav-bar {
-//     &__arrow {
-//       color: var(--cp-text1);
-//       font-size: 18px;
-//     }
-//     &__title {
-//       font-size: 15px;
-//     }
-//   }
-// }
+:deep() {
+  .van-nav-bar {
+    &__arrow {
+      color: var(--cp-text1);
+      font-size: 18px;
+    }
+    &__title {
+      font-size: 15px;
+    }
+  }
+}
 </style>
