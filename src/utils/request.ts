@@ -24,11 +24,11 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res) => {
-    // 3. 处理业务失败
+    // 3. fail
     if (res.data.code !== 10000) {
-      // 错误提示
-      showToast(res.data.message || '业务失败')
-      // 返回 错误的promise
+      // msg
+      showToast(res.data.message || 'fail')
+      // promise
       return Promise.reject(res.data)
       // 传入 code 将来catch的时候可以使用
     }
