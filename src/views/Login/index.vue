@@ -47,5 +47,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/login.scss';
+// @import '@/styles/login.scss';
 </style>
