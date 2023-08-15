@@ -11,8 +11,10 @@ import { VantResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),Components({
-    resolvers:[VantResolver( {importStyle: false})]
+  plugins: [vue(),
+    Components({
+      dts:false,
+      resolvers:[VantResolver( {importStyle: false})]
   })],
   resolve: {
     alias: {
