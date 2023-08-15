@@ -27,25 +27,19 @@
 </script>
 
 <template>
-  <!-- 固定定位，左侧箭头，标题，右侧文字 -->
-  <van-nav-bar
-    fixed
-    left-arrow
-    title="log in"
-    right-text="register"
-  ></van-nav-bar>
+  <div class="cp-nav-bar">cp-nav-bar</div>
 </template>
 
 <style lang="scss" scoped>
-:deep() {
-  .van-nav-bar {
-    &__arrow {
-      color: var(--cp-text1);
-      font-size: 18px;
-    }
-    &__title {
-      font-size: 15px;
-    }
-  }
-}
+// :deep() {
+//   .van-nav-bar {
+//     &__arrow {
+//       color: var(--cp-text1);
+//       font-size: 18px;
+//     }
+//     &__title {
+//       font-size: 15px;
+//     }
+//   }
+// }
 </style>

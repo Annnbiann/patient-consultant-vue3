@@ -45,7 +45,7 @@
 <template>
   
   <cp-nav-bar></cp-nav-bar>
-  <div class="login-page">Login</div>
+  <van-button>hi</van-button>
 </template>
 
 <style lang="scss" scoped>
