@@ -1,26 +1,8 @@
-<script setup lang="ts">
-import { Button as VanButton } from 'vant'
-import { useUserStore } from './stores'
-import axios from './utils/request'
-const store = useUserStore()
-const getUser = () =>{
-  axios.request({
-    url: 'patient/myUser',
-    method: 'get'
-  })
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>App
-    <van-button type="primary"
-    @click="store.setUser({
-      id:'1',
-      avatar:'1',
-      token:'1',
-      mobile:'1',
-      account:'1'
-    })">log in</van-button>
-      <van-button @click="getUser">userinfo</van-button>
-  </div>
+  <!-- router -->
+  <router-view></router-view>
 </template>
+
+<style lang="scss" scoped></style>
