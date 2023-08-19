@@ -1,4 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useMobileCode } from '@/composables'
+import { loginByMobile, loginByPassword } from '@/services/user'
+import { codeRules, mobileRules, passwordRules } from '@/utils/rules'
+import { showSuccessToast, showToast } from 'vant'
+import { useUserStore } from '@/stores';
+import { useRoute, useRouter } from 'vue-router'
+// import router from '@/router';
+const mobile = ref('')
+const password = ref('')
+const agree = ref(false)
+const store = useUserStore()
+const router = useRouter()
+const route = useRoute()
+
+const onSubmit = async () =>{
+  if (!agree.value) return showToast('Please read and tick the agreement')
+  //log in
+  const res = await loginByPassword(mobile.value, password.value)
+  store.setUser(res.data)
+  showSuccessToast('Log in succussfully')
+  router.replace((route.query.returnUrl as string) || '/user')
+}
+
+//password visible
+const isShow = ref(false)
+</script>
 
 <template>
   <div class="login-page">
@@ -8,18 +35,31 @@
     ></cp-nav-bar>
     <!-- 头部 -->
     <div class="login-head">
-      <h3>Password</h3>
+      <h3>Kia ora</h3>
       <a href="javascript:;">
-        <span>Text code login</span>
+        <span>Message login</span>
         <van-icon name="arrow"></van-icon>
       </a>
     </div>
     <!-- 表单 -->
-    <van-form autocomplete="off">
-      <van-field placeholder="请输入手机号" type="tel"></van-field>
-      <van-field placeholder="请输入密码" type="password"></van-field>
+    <van-form autocomplete="off" @submit="onSubmit">
+      <van-field v-model="mobile" 
+      :rules="mobileRules"
+      placeholder="account number" type="tel"></van-field>
+      <van-field v-model="password" 
+      :rules="passwordRules"
+      placeholder="password" 
+      
+      :type="isShow ? 'text' : 'password'">
+      <template #button>
+        <cp-icon 
+        :name="`login-eye-${isShow? 'on': 'off'}`"
+        @click="isShow = !isShow" 
+        style="margin-right: 10px;"></cp-icon>
+      </template>
+    </van-field>
       <div class="cp-cell">
-        <van-checkbox>
+        <van-checkbox v-model="agree">
           <span>I agree on</span>
           <a href="javascript:;">user agreement</a>
           <span>and</span>
@@ -27,12 +67,14 @@
         </van-checkbox>
       </div>
       <div class="cp-cell">
-        <van-button block round type="primary">log in</van-button>
+        <van-button native-type="submit" block round type="primary">log in</van-button>
       </div>
       <div class="cp-cell">
         <a href="javascript:;">forgot password？</a>
       </div>
     </van-form>
+
+    
     <!-- 底部 -->
     <!-- <div class="login-other">
       <van-divider>第三方登录</van-divider>

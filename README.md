@@ -1,6 +1,6 @@
 # consult-patient-vue3
-
-This template should help get you started developing with Vue 3 in Vite.
+account number: 13230000001 to 13230000100
+password: abc12345
 
 ## Recommended IDE Setup
 
