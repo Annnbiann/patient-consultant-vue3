@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import KnowledgeList from './components/KnowledgeList.vue'
-import FollowDoctor from './components/FollowDoctor.vue'
-import { useConsultStore } from '@/stores'
-import { ConsultType } from '@/enums'
+// import KnowledgeList from './components/KnowledgeList.vue'
+// import FollowDoctor from './components/FollowDoctor.vue'
+// import { useConsultStore } from '@/stores'
+// import { ConsultType } from '@/enums'
 
 const active = ref(1)
 
-const store = useConsultStore()
+// const store = useConsultStore()
 </script>
 
 <template>
@@ -15,9 +15,9 @@ const store = useConsultStore()
     <!-- 头部 -->
     <div class="home-header">
       <div class="con">
-        <h1>优医</h1>
+        <h1>HealthLink</h1>
         <div class="search">
-          <cp-icon name="home-search" /> 搜一搜：疾病/症状/医生/健康知识
+          <cp-icon name="home-search" /> search：symptom/doctor/tip
         </div>
       </div>
     </div>
@@ -27,26 +27,26 @@ const store = useConsultStore()
         <van-col span="8">
           <router-link to="/" class="nav">
             <cp-icon name="home-doctor"></cp-icon>
-            <p class="title">问医生</p>
-            <p class="desc">按科室查问医生</p>
+            <p class="title">Ask Doctor</p>
+            <p class="desc">search by department</p>
           </router-link>
         </van-col>
         <van-col span="8">
           <router-link
             to="/consult/fast"
             class="nav"
-            @click="store.setType(ConsultType.Fast)"
+           
           >
             <cp-icon name="home-graphic"></cp-icon>
-            <p class="title">极速问诊</p>
-            <p class="desc">20s医生极速回复</p>
+            <p class="title">Consultation</p>
+            <p class="desc">Doctor quick response</p>
           </router-link>
         </van-col>
         <van-col span="8">
           <router-link to="/" class="nav">
             <cp-icon name="home-prescribe"></cp-icon>
-            <p class="title">开药门诊</p>
-            <p class="desc">线上买药更方便</p>
+            <p class="title">Medcine</p>
+            <p class="desc">Online pharmacy</p>
           </router-link>
         </van-col>
       </van-row>
@@ -54,53 +54,53 @@ const store = useConsultStore()
         <van-col span="6">
           <router-link to="/" class="nav min">
             <cp-icon name="home-order"></cp-icon>
-            <p class="title">药品订单</p>
+            <p class="title">Med order</p>
           </router-link>
         </van-col>
         <van-col span="6">
           <router-link to="/" class="nav min">
             <cp-icon name="home-docs"></cp-icon>
-            <p class="title">健康档案</p>
+            <p class="title">Health history</p>
           </router-link>
         </van-col>
         <van-col span="6">
           <router-link to="/" class="nav min">
             <cp-icon name="home-rp"></cp-icon>
-            <p class="title">我的处方</p>
+            <p class="title">Prescription</p>
           </router-link>
         </van-col>
         <van-col span="6">
           <router-link to="/" class="nav min">
             <cp-icon name="home-find"></cp-icon>
-            <p class="title">疾病查询</p>
+            <p class="title">Search</p>
           </router-link>
         </van-col>
       </van-row>
     </div>
-    <!-- 轮播图 -->
+    <!-- png -->
     <div class="home-banner">
       <van-swipe indicator-color="#fff">
         <van-swipe-item>
-          <img src="@/assets/ad.png" alt="" />
+          <img src="@/assets/homep.png" alt="" />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="@/assets/ad.png" alt="" />
+          <img src="@/assets/homep.png" alt="" />
         </van-swipe-item>
       </van-swipe>
     </div>
     <!-- TAB -->
     <van-tabs shrink sticky v-model:active="active">
-      <van-tab title="关注">
+      <van-tab title="Follow">
         <follow-doctor></follow-doctor>
         <knowledge-list type="like" />
       </van-tab>
-      <van-tab title="推荐">
+      <van-tab title="Recommend">
         <knowledge-list type="recommend" />
       </van-tab>
-      <van-tab title="减脂">
+      <van-tab title="Weight loss">
         <knowledge-list type="fatReduction" />
       </van-tab>
-      <van-tab title="饮食">
+      <van-tab title="Food">
         <knowledge-list type="food" />
       </van-tab>
     </van-tabs>
@@ -129,7 +129,7 @@ const store = useConsultStore()
     position: relative;
     padding: 0 15px;
     > h1 {
-      font-size: 18px;
+      font-size: 24px;
       color: #fff;
       font-weight: normal;
       padding: 20px 0;
@@ -166,6 +166,7 @@ const store = useConsultStore()
     .title {
       font-weight: 500;
       margin-top: 5px;
+      margin-bottom: 10px;
       color: var(--cp-text1);
     }
     .desc {
@@ -175,7 +176,7 @@ const store = useConsultStore()
     }
     &.min {
       .cp-icon {
-        font-size: 31px;
+        font-size: 35px;
       }
       .title {
         font-size: 13px;

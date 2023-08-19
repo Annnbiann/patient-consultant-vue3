@@ -13,15 +13,15 @@ onMounted(async () => {
   user.value = res.data
 })
 
-// 初始化快捷工具
+// 
 const tools = [
-  { label: '我的问诊', path: '/user/consult' },
-  { label: '我的处方', path: '/' },
-  { label: '家庭档案', path: '/user/patient' },
-  { label: '地址管理', path: '/' },
-  { label: '我的评价', path: '/' },
-  { label: '官方客服', path: '/' },
-  { label: '设置', path: '/' }
+  { label: 'Consultations', path: '/user/consult' },
+  { label: 'Prescription', path: '/' },
+  { label: 'Family records', path: '/user/patient' },
+  { label: 'Address', path: '/' },
+  { label: 'Review', path: '/' },
+  { label: 'Customer service', path: '/' },
+  { label: 'Setting', path: '/' }
 ]
 // 退出
 const store = useUserStore()
@@ -29,7 +29,7 @@ const router = useRouter()
 const onLogout = async () => {
   await showConfirmDialog({
     title: '温馨提示',
-    message: '您是否确认退出优医问诊？'
+    message: 'Are you sure to log out？'
   })
   // 点击的确认
   store.delUser()
@@ -50,27 +50,27 @@ const onLogout = async () => {
       <van-row>
         <van-col span="6">
           <p>{{ user?.collectionNumber }}</p>
-          <p>收藏</p>
+          <p>Like</p>
         </van-col>
         <van-col span="6">
           <p>{{ user?.likeNumber }}</p>
-          <p>关注</p>
+          <p>Follow</p>
         </van-col>
         <van-col span="6">
           <p>{{ user?.score }}</p>
-          <p>积分</p>
+          <p>Points</p>
         </van-col>
         <van-col span="6">
           <p>{{ user?.couponNumber }}</p>
-          <p>优惠券</p>
+          <p>Coupons</p>
         </van-col>
       </van-row>
     </div>
     <div class="user-page-order">
       <div class="head">
-        <h3>药品订单</h3>
+        <h3>Med order</h3>
         <router-link to="/order"
-          >全部订单 <van-icon name="arrow"
+          >All <van-icon name="arrow"
         /></router-link>
       </div>
       <van-row>
@@ -78,31 +78,31 @@ const onLogout = async () => {
           <van-badge :content="user?.orderInfo.paidNumber || ''">
             <cp-icon name="user-paid" />
           </van-badge>
-          <p>待付款</p>
+          <p>Pending payment</p>
         </van-col>
         <van-col span="6">
           <van-badge :content="user?.orderInfo.receivedNumber || ''">
             <cp-icon name="user-shipped" />
           </van-badge>
-          <p>待发货</p>
+          <p>Pending dispatch</p>
         </van-col>
         <van-col span="6">
           <van-badge :content="user?.orderInfo.shippedNumber || ''">
             <cp-icon name="user-received" />
           </van-badge>
-          <p>待收货</p>
+          <p>Awaiting delivery</p>
         </van-col>
         <van-col span="6">
           <van-badge :content="user?.orderInfo.finishedNumber || ''">
             <cp-icon name="user-finished" />
           </van-badge>
-          <p>已完成</p>
+          <p>Complete order</p>
         </van-col>
       </van-row>
     </div>
-    <!-- 快捷工具 -->
+    
     <div class="user-page-group">
-      <h3>快捷工具</h3>
+      <h3>Quick Link</h3>
       <van-cell
         v-for="(item, i) in tools"
         :key="item.label"

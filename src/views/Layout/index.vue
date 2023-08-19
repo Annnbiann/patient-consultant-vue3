@@ -36,7 +36,7 @@ onMounted(async () => {
         </template>
       </van-tabbar-item>
       <van-tabbar-item to="/user">
-        My
+        Profile
         <template #icon="{ active }">
           <cp-icon :name="`home-mine-${active ? 'active' : 'default'}`">
           </cp-icon>
