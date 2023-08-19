@@ -81,15 +81,15 @@ const active = ref(1)
     <div class="home-banner">
       <van-swipe indicator-color="#fff">
         <van-swipe-item>
-          <img src="@/assets/homep.png" alt="" />
+          <img src="@/assets/c.png" alt="" />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="@/assets/homep.png" alt="" />
+          <img src="@/assets/c.png" alt="" />
         </van-swipe-item>
       </van-swipe>
     </div>
     <!-- TAB -->
-    <van-tabs shrink sticky v-model:active="active">
+    <!-- <van-tabs shrink sticky v-model:active="active">
       <van-tab title="Follow">
         <follow-doctor></follow-doctor>
         <knowledge-list type="like" />
@@ -103,7 +103,7 @@ const active = ref(1)
       <van-tab title="Food">
         <knowledge-list type="food" />
       </van-tab>
-    </van-tabs>
+    </van-tabs> -->
   </div>
 </template>
 
@@ -129,7 +129,7 @@ const active = ref(1)
     position: relative;
     padding: 0 15px;
     > h1 {
-      font-size: 24px;
+      font-size: 22px;
       color: #fff;
       font-weight: normal;
       padding: 20px 0;
@@ -176,7 +176,7 @@ const active = ref(1)
     }
     &.min {
       .cp-icon {
-        font-size: 35px;
+        font-size: 30px;
       }
       .title {
         font-size: 13px;
@@ -187,9 +187,10 @@ const active = ref(1)
   }
 }
 .home-banner {
-  padding: 10px 15px;
-  height: 100px;
+  padding: 0px 15px;
+  height: 80px;
   img {
+    
     width: 100%;
     height: 100%;
   }
