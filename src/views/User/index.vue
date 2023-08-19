@@ -47,7 +47,7 @@ const onLogout = async () => {
       <div class="top">
         <van-image round fit="cover" :src="user?.avatar" />
         <div class="name">
-          <p>{{ user?.account }}</p>
+          <p>{{ user?.mobile }}</p>
           <p><van-icon name="edit" /></p>
         </div>
       </div>

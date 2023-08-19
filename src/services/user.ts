@@ -19,10 +19,10 @@ import type {
   export const loginByMobile = (mobile: string, code: string) =>
     request<User>('login', 'POST', { mobile, code })
   
-  // 获取用户信息
+  // get user info
   export const getUserInfo = () => request<UserInfo>('patient/myUser')
   
-  // get user info
+  // get p list
   export const getPatientList = () => request<PatientList>('patient/mylist')
   
   // 添加患者

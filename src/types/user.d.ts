@@ -11,7 +11,7 @@ export type User = {
     avatar: string
   }
   
-  // login登录register注册changeMobile更换手机号forgetPassword找回密码,bindMobile绑定三方登录
+  // login register  changeMobile   forgetPassword  ,bindMobile
   export type CodeType =
     | 'login'
     | 'register'
@@ -21,22 +21,22 @@ export type User = {
   
   type OmitUser = Omit<User, 'token'>
   export type UserInfo = OmitUser & {
-    /** 关注 */
+    /** like */
     likeNumber: number
-    /** 收藏 */
+    /**  */
     collectionNumber: number
-    /** 积分 */
+    /** point */
     score: number
-    /** 优惠券 */
+    /**  */
     couponNumber: number
     orderInfo: {
-      /** 待付款 */
+      /**  */
       paidNumber: number
-      /** 待发货 */
+      /**  */
       receivedNumber: number
-      /** 待收货 */
+      /**  */
       shippedNumber: number
-      /** 已完成 */
+      /**  */
       finishedNumber: number
     }
   }
