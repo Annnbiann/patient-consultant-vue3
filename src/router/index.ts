@@ -1,12 +1,21 @@
 import { useUserStore } from '@/stores'
 import { createRouter, createWebHistory } from 'vue-router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+
+
+NProgress.configure({
+  showSpinner:false
+})
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path:'/login',
-      component: ()=> import('@/views/Login/index.vue')
+      component: ()=> import('@/views/Login/index.vue'),
+      meta: { title:'login' }
     },
     {
       path:'/',
@@ -38,12 +47,19 @@ const router = createRouter({
   ]
 })
 
+
 router.beforeEach((to) => {
-  //token
+  NProgress.start()
+  //  token 
   const store = useUserStore()
-  //white list
-  const whiteList = ['/login']
-  if (!store.user ?.token && !whiteList.includes(to.path))  return'/login'
+  // 
+  const wihteList = ['/login', '/login/callback']
+  //
+  if (!store.user?.token && !wihteList.includes(to.path)) return '/login'
 })
 
+router.afterEach((to) => {
+  document.title = `${to.meta.title || ''}-HealthLink`
+  NProgress.done()
+})
 export default router

@@ -17,10 +17,13 @@ const route = useRoute()
 const onSubmit = async () =>{
   if (!agree.value) return showToast('Please read and tick the agreement')
   //log in
-  const res = await loginByPassword(mobile.value, password.value)
+  try{const res = await loginByPassword(mobile.value, password.value)
   store.setUser(res.data)
   showSuccessToast('Log in succussfully')
-  router.replace((route.query.returnUrl as string) || '/user')
+  router.replace((route.query.returnUrl as string) || '/user')}
+  catch (error) {
+    // Handle login error, e.g., display wrong password message
+    showToast('Incorrect password. Please try again.');}
 }
 
 //password visible

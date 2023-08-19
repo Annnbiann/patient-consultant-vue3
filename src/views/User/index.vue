@@ -23,15 +23,19 @@ const tools = [
   { label: 'Customer service', path: '/' },
   { label: 'Setting', path: '/' }
 ]
-// 退出
+// log out
 const store = useUserStore()
 const router = useRouter()
 const onLogout = async () => {
   await showConfirmDialog({
-    title: '温馨提示',
-    message: 'Are you sure to log out？'
+    title: 'Attention',
+    message: 'Are you sure you want to log out？',
+  
+    confirmButtonText: 'Yes', 
+    cancelButtonText: 'No'
   })
-  // 点击的确认
+  // above button
+  
   store.delUser()
   router.push('/login')
 }
@@ -115,7 +119,7 @@ const onLogout = async () => {
       </van-cell>
     </div>
     <!-- 退出登录 -->
-    <a href="javascript:;" class="logout" @click="onLogout">退出登录</a>
+    <a href="javascript:;" class="logout" @click="onLogout">Log out</a>
   </div>
 </template>
 
