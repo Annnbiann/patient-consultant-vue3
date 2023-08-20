@@ -7,7 +7,7 @@ import {
 } from '@/services/user'
 import type { PatientList, Patient } from '@/types/user'
 import { ref, onMounted, computed } from 'vue'
-// import { nameRules, idCardRules } from '@/utils/rules'
+import { nameRules, idCardRules } from '@/utils/rules'
 import {
   showConfirmDialog,
   showSuccessToast,
@@ -15,7 +15,7 @@ import {
   type FormInstance
 } from 'vant'
 import { useRoute } from 'vue-router'
-// import { useConsultStore } from '@/stores'
+//import { useConsultStore } from '@/stores'
 import router from '@/router'
 
 // get 
@@ -60,34 +60,34 @@ const initPaient: Patient = {
 }
 const patient = ref<Patient>({ ...initPaient })
 
-// 支持复选框
+// 
 const defaultFlag = computed({
   get: () => (patient.value.defaultFlag === 1 ? true : false),
   set: (value) => (patient.value.defaultFlag = value ? 1 : 0)
 })
 
-// 进行提交
+// upload
 const form = ref<FormInstance>()
 const onSubmit = async () => {
-  // 表单整体校验 validate 进行校验
+  //  validate 
   await form.value?.validate()
-  // 性别校验
-  // 取出身份证倒数第二位，%2之后  1 男  0 女
-  const gender = +patient.value.idCard.slice(-2, -1) % 2
-  if (gender !== patient.value.gender) {
-    await showConfirmDialog({
-      title: '温馨提示',
-      message: '填写的性别和身份证上的不一致\n您确认提交吗？'
-    })
-  }
-  // 提交即可  添加 或者 编辑
+  // gender
+  // %2之后  1 m 0 f
+  // const gender = +patient.value.idCard.slice(-2, -1) % 2
+  // if (gender !== patient.value.gender) {
+  //   await showConfirmDialog({
+  //     title: '温馨提示',
+  //     message: '填写的性别和身份证上的不一致\n您确认提交吗？'
+  //   })
+  // }
+  // 
   patient.value.id
     ? await editPatient(patient.value)
     : await addPatient(patient.value)
-  // 成功：关闭添加患者界面，加载患者列表，成功提示
+  // 
   show.value = false
   loadList()
-  showSuccessToast(patient.value.id ? '编辑成功' : '添加成功')
+  showSuccessToast(patient.value.id ? 'Edit successfully' : 'Add successfully')
 }
 
 // 删除患者
