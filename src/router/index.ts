@@ -18,6 +18,12 @@ const router = createRouter({
       meta: { title:'login' }
     },
     {
+      path:'/user/patient',
+      component: ()=> import('@/views/User/PatientPage.vue'),
+      meta: { title:'familyrecord' }
+    
+    },
+    {
       path:'/',
       redirect: '/home',
       component: ()=> import('@/views/Layout/index.vue'),
