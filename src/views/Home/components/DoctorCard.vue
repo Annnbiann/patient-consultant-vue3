@@ -1,32 +1,17 @@
-<script lang="ts" setup>
-import { useFollow } from '@/composables'
-import type { Doctor } from '@/types/consult'
-
-defineProps<{
-  item: Doctor
-}>()
-
-// 关注逻辑
-const { loading, follow } = useFollow()
-</script>
+<script lang="ts" setup></script>
 <template>
   <div class="doctor-card">
-    <van-image round :src="item.avatar" />
-    <p class="name">{{ item.name }}</p>
-    <p class="van-ellipsis">{{ item.hospitalName }} {{ item.depName }}</p>
-    <p>{{ item.positionalTitles }}</p>
-    <van-button
+    <van-image
       round
-      size="small"
-      type="primary"
-      @click="follow(item)"
-      :loading="loading"
-    >
-      {{ item.likeFlag === 1 ? '已关注' : '+ 关注' }}
-    </van-button>
+      src="https://yanxuan-item.nosdn.127.net/3cb61b3fd4761555e56c4a5f19d1b4b1.png"
+    />
+    <p class="name">Win</p>
+    <p class="van-ellipsis">Hamilton K medical center</p>
+    <p>Nurse</p>
+    <van-button round size="small" type="primary">+ follow</van-button>
   </div>
 </template>
-<style scoped lang="scss">
+<style scoped lang="scss" >
 .doctor-card {
   width: 135px;
   height: 190px;

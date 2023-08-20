@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import KnowledgeList from './components/KnowledgeList.vue'
-// import FollowDoctor from './components/FollowDoctor.vue'
+import FollowDoctor from './components/FollowDoctor.vue'
 // import { useConsultStore } from '@/stores'
 // import { ConsultType } from '@/enums'
 
@@ -92,7 +92,7 @@ const active = ref(1)
     <van-tabs shrink sticky v-model:active="active">
       <van-tab title="Follow">
         <follow-doctor></follow-doctor>
-        <knowledge-list type="like" />
+        <!-- <knowledge-list type="like" /> -->
       </van-tab>
       <van-tab title="Recommend">
         

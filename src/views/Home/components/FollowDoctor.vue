@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import DoctorCard from './DoctorCard.vue'
-import { useWindowSize } from '@vueuse/core'
-import type { DoctorList } from '@/types/consult'
+// import { useWindowSize } from '@vueuse/core'
+// import type { DoctorList } from '@/types/consult'
 import { ref, onMounted } from 'vue'
-import { getDoctorPage } from '@/services/consult'
+// import { getDoctorPage } from '@/services/consult'
 
-const { width } = useWindowSize()
+// const { width } = useWindowSize()
 
 // 组件初始化获取设备宽度，页面尺寸发生改变获取设备的宽度
 // import { ref, onMounted, onUnmounted } from 'vue'
@@ -18,19 +18,19 @@ const { width } = useWindowSize()
 // onUnmounted(() => {
 //   window.removeEventListener('resize', setWidth)
 // })
-const list = ref<DoctorList>([])
-const loadData = async () => {
-  const res = await getDoctorPage({ current: 1, pageSize: 5 })
-  list.value = res.data.rows
-}
-onMounted(() => loadData())
+// const list = ref<DoctorList>([])
+// const loadData = async () => {
+//   const res = await getDoctorPage({ current: 1, pageSize: 5 })
+//   list.value = res.data.rows
+// }
+// onMounted(() => loadData())
 </script>
 
 <template>
   <div class="follow-doctor">
     <div className="head">
-      <p>推荐关注</p>
-      <a href="javascript:;"> 查看更多<i class="van-icon van-icon-arrow" /></a>
+      <p>Recomend</p>
+      <a href="javascript:;"> more<i class="van-icon van-icon-arrow" /></a>
     </div>
     <div class="body">
       <!-- swipe 组件 -->
@@ -39,7 +39,7 @@ onMounted(() => loadData())
         :showIndicators="false"
         :loop="false"
       >
-        <van-swipe-item v-for="item in list" :key="item.id">
+        <van-swipe-item v-for="item in 5" :key="item.id">
           <doctor-card :item="item"></doctor-card>
         </van-swipe-item>
       </van-swipe>
