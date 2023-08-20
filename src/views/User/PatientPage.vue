@@ -70,7 +70,7 @@ const defaultFlag = computed({
 const form = ref<FormInstance>()
 const onSubmit = async () => {
   //  validate 
-  await form.value?.validate()
+  //
   // gender
   // %2之后  1 m 0 f
   // const gender = +patient.value.idCard.slice(-2, -1) % 2
@@ -90,25 +90,27 @@ const onSubmit = async () => {
   showSuccessToast(patient.value.id ? 'Edit successfully' : 'Add successfully')
 }
 
-// 删除患者
+// delete
 const remove = async () => {
   if (patient.value.id) {
-    // 确认框，删除请求，关闭，加载，提示
+    // 
     await showConfirmDialog({
-      title: '温馨提示',
-      message: `您确认删除 ${patient.value.name} 患者信息？`
+      title: 'Alert',
+      message: `Are you sure to delete ${patient.value.name}'s info？`,
+      confirmButtonText: 'Yes', 
+      cancelButtonText: 'No'
     })
     await delPatient(patient.value.id)
     show.value = false
     loadList()
-    showSuccessToast('删除成功')
+    showSuccessToast('Delete')
   }
 }
 
-// 是不是选择患者
+// 
 const route = useRoute()
 const isChange = computed(() => route.query.isChange === '1')
-// 选择效果
+// 
 const patientId = ref<string>()
 const selectedPatient = (item: Patient) => {
   if (isChange.value) {
@@ -116,10 +118,10 @@ const selectedPatient = (item: Patient) => {
   }
 }
 
-// 下一步
+// next
 // const store = useConsultStore()
 // const next = () => {
-//   if (!patientId.value) return showToast('请选择患者')
+//   if (!patientId.value) return showToast('select')
 //   store.setPatient(patientId.value)
 //   router.push('/consult/pay')
 // }
@@ -137,7 +139,7 @@ const selectedPatient = (item: Patient) => {
           <span>{{ item.genderValue === "男" ? "male" : item.genderValue === "女" ? "female" : item.genderValue }}</span>
           <span>{{ item.age }}</span>
         </div>
-        <div class="icon"><cp-icon name="user-edit" /></div>
+        <div class="icon" @click="showPopup(item)"><cp-icon name="user-edit" /></div>
         <div class="tag" v-if="item.defaultFlag ===1">default</div>
       </div>
     
@@ -175,7 +177,7 @@ const selectedPatient = (item: Patient) => {
           :rules="idCardRules"
         />
         <van-field label="gender" class="pb4">
-          <!-- 单选按钮组件 -->
+          <!--  -->
           <template #input>
             <cp-radio-btn
               v-model="patient.gender"
@@ -189,7 +191,7 @@ const selectedPatient = (item: Patient) => {
           </template>
         </van-field>
       </van-form>
-      <!-- 删除按钮 -->
+      <!-- delete -->
       <van-action-bar v-if="patient.id">
         <van-action-bar-button text="delete" @click="remove" />
       </van-action-bar>
