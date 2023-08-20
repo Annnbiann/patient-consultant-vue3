@@ -52,24 +52,24 @@ export type User = {
   // // Pick 是从对象中摘取一些属性，得到对象类型
   // type PickPerson = Pick<Person, 'gender' | 'age'>
   
-  // 家庭档案-患者信息
+  // family record--patient
   export type Patient = {
-    /** 患者ID */
+    /** ID */
     id?: string
-    /** 患者名称 */
+    /** name */
     name: string
-    /** 身份证号 */
+    /** id */
     idCard: string
-    /** 0不默认  1默认 */
+    /** 0    1 default */
     defaultFlag: 0 | 1
-    /** 0 女  1 男 */
+    /** 0 female  1 male */
     gender: 0 | 1
-    /** 性别文字 */
+    /** gender */
     genderValue?: string
-    /** 年龄 */
+    /** age */
     age?: number
   }
   
-  // 家庭档案-患者信息列表
+  // patient list
   export type PatientList = Patient[]
   

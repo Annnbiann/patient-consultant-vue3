@@ -7,7 +7,7 @@ import {
 } from '@/services/user'
 import type { PatientList, Patient } from '@/types/user'
 import { ref, onMounted, computed } from 'vue'
-import { nameRules, idCardRules } from '@/utils/rules'
+// import { nameRules, idCardRules } from '@/utils/rules'
 import {
   showConfirmDialog,
   showSuccessToast,
@@ -15,15 +15,15 @@ import {
   type FormInstance
 } from 'vant'
 import { useRoute } from 'vue-router'
-import { useConsultStore } from '@/stores'
+// import { useConsultStore } from '@/stores'
 import router from '@/router'
 
-// 组件挂载完毕，获取数据
+// get 
 const list = ref<PatientList>([])
 const loadList = async () => {
   const res = await getPatientList()
   list.value = res.data
-  // 默认选中患者
+  // default patient
   if (isChange.value && list.value.length) {
     const defPatient = list.value.find((item) => item.defaultFlag === 1)
     if (defPatient) patientId.value = defPatient.id
@@ -36,11 +36,11 @@ onMounted(() => {
 })
 
 const options = [
-  { label: '男', value: 1 },
-  { label: '女', value: 0 }
+  { label: 'male', value: 1 },
+  { label: 'female', value: 0 }
 ]
 
-// 控制popup
+// popup
 const show = ref(false)
 const showPopup = (item?: Patient) => {
   if (item) {
@@ -115,77 +115,66 @@ const selectedPatient = (item: Patient) => {
     patientId.value = item.id
   }
 }
+
 // 下一步
-const store = useConsultStore()
-const next = () => {
-  if (!patientId.value) return showToast('请选择患者')
-  store.setPatient(patientId.value)
-  router.push('/consult/pay')
-}
+// const store = useConsultStore()
+// const next = () => {
+//   if (!patientId.value) return showToast('请选择患者')
+//   store.setPatient(patientId.value)
+//   router.push('/consult/pay')
+// }
 </script>
+
 
 <template>
   <div class="patient-page">
-    <cp-nav-bar :title="isChange ? '选择患者' : '家庭档案'"></cp-nav-bar>
-    <!-- 头部提示 -->
-    <div class="patient-change" v-if="isChange">
-      <h3>请选择患者信息</h3>
-      <p>以便医生给出更准确的治疗，信息仅医生可见</p>
+    <cp-nav-bar title="Family Record"></cp-nav-bar>
+    <div class="patient-list">
+      <div class="patient-item" v-for="item in list" :key="item.id">
+        <div class="info">
+          <span class="name">{{item.name}}</span>
+          <span class="id">{{ item.idCard.replace(/^(.{6}).+(.{4})$/, '$1********$2') }}</span>
+          <span>{{ item.genderValue === "男" ? "male" : item.genderValue === "女" ? "female" : item.genderValue }}</span>
+          <span>{{ item.age }}</span>
+        </div>
+        <div class="icon"><cp-icon name="user-edit" /></div>
+        <div class="tag" v-if="item.defaultFlag ===1">default</div>
+      </div>
+    
+      <div class="patient-add" v-if="list.length < 6 " @click="showPopup()">
+        <cp-icon name="user-add" />
+        <p>Add</p>
+      </div>
+      <div class="patient-tip">Maximum: 6 family member </div>
     </div>
 
-    <div class="patient-list">
-      <div
-        class="patient-item"
-        v-for="item in list"
-        :key="item.id"
-        @click="selectedPatient(item)"
-        :class="{ selected: patientId === item.id }"
-      >
-        <div class="info">
-          <span class="name">{{ item.name }}</span>
-          <span class="id">
-            {{ item.idCard.replace(/^(.{6}).+(.{4})$/, '$1********$2') }}
-          </span>
-          <span>{{ item.genderValue }}</span>
-          <span>{{ item.age }}岁</span>
-        </div>
-        <div class="icon" @click.stop="showPopup(item)">
-          <cp-icon name="user-edit" />
-        </div>
-        <div class="tag" v-if="item.defaultFlag === 1">默认</div>
-      </div>
-      <div class="patient-add" v-if="list.length < 6" @click="showPopup()">
-        <cp-icon name="user-add" />
-        <p>添加患者</p>
-      </div>
-      <div class="patient-tip">最多可添加 6 人</div>
-    </div>
-    <!-- 底部按钮 -->
-    <div class="patient-next" @click="next" v-if="isChange">
+
+    <!-- popup -->
+    <!-- <div class="patient-next" @click="next" v-if="isChange">
       <van-button type="primary" round block>下一步</van-button>
-    </div>
+    </div> -->
     <!-- 使用 popup 组件 -->
     <van-popup position="right" v-model:show="show">
       <cp-nav-bar
-        :title="patient.id ? '编辑患者' : '添加患者'"
-        right-text="保存"
+        :title="patient.id ? 'Edit' : 'Add'"
+        right-text="Save"
         :back="() => (show = false)"
         @click-right="onSubmit"
       ></cp-nav-bar>
       <van-form autocomplete="off" ref="form">
         <van-field
           v-model="patient.name"
-          label="真实姓名"
-          placeholder="请输入真实姓名"
+          label="name"
+          placeholder="name"
           :rules="nameRules"
         />
         <van-field
           v-model="patient.idCard"
-          label="身份证号"
-          placeholder="请输入身份证号"
+          label="ID"
+          placeholder="ID"
           :rules="idCardRules"
         />
-        <van-field label="性别" class="pb4">
+        <van-field label="gender" class="pb4">
           <!-- 单选按钮组件 -->
           <template #input>
             <cp-radio-btn
@@ -194,7 +183,7 @@ const next = () => {
             ></cp-radio-btn>
           </template>
         </van-field>
-        <van-field label="默认就诊人">
+        <van-field label="default">
           <template #input>
             <van-checkbox v-model="defaultFlag" :icon-size="18" round />
           </template>
@@ -202,11 +191,15 @@ const next = () => {
       </van-form>
       <!-- 删除按钮 -->
       <van-action-bar v-if="patient.id">
-        <van-action-bar-button text="删除" @click="remove" />
+        <van-action-bar-button text="delete" @click="remove" />
       </van-action-bar>
     </van-popup>
+  
   </div>
+
+
 </template>
+
 
 <style lang="scss" scoped>
 .patient-page {
