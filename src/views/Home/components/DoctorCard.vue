@@ -1,14 +1,25 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useFollow } from '@/composables'
+import type { Doctor } from '@/types/consult'
+
+defineProps<{
+  item: Doctor
+}>()
+
+// follow
+const { loading, follow } = useFollow()
+</script>
 <template>
   <div class="doctor-card">
     <van-image
       round
-      src="https://yanxuan-item.nosdn.127.net/3cb61b3fd4761555e56c4a5f19d1b4b1.png"
+      :src="item.avatar"
     />
-    <p class="name">Win</p>
+    <p class="name">George</p>
     <p class="van-ellipsis">Hamilton K medical center</p>
     <p>Nurse</p>
-    <van-button round size="small" type="primary">+ follow</van-button>
+    <van-button round size="small" type="primary" @click="follow(item)"
+      :loading="loading"> {{ item.likeFlag === 1 ? 'following' : '+follow' }}</van-button>
   </div>
 </template>
 <style scoped lang="scss" >
