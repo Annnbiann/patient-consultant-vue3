@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "@vueuse/core": "^10.3.0",
     "axios": "^1.4.0",
     "consult-patient-vue3": "link:",
     "nprogress": "^0.2.0",
