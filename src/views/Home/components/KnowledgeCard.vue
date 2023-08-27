@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useFollow } from '@/composables'
 import type { Knowledge } from '@/types/consult';
+defineProps<{
+  item:Knowledge
+}>()
 const{loading, follow} = useFollow('knowledge')
 </script>
 
@@ -10,7 +13,7 @@ const{loading, follow} = useFollow('knowledge')
         <van-image
           round
           class="avatar"
-          src="https://yanxuan-item.nosdn.127.net/9ad83e8d9670b10a19b30596327cfd14.png"
+          :src="item.creatorAvatar"
         ></van-image>
         <div class="info">
           <p class="name">GP: Jim</p>
