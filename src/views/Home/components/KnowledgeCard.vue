@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useFollow } from '@/composables'
+import type { Knowledge } from '@/types/consult';
+const{loading, follow} = useFollow('knowledge')
 </script>
 
 <template>
@@ -13,7 +16,7 @@
           <p class="name">GP: Jim</p>
           <p class="dep van-ellipsis">work at Auckland Hospital</p>
         </div>
-        <van-button class="btn" size="small" round>+ follow</van-button>
+        <van-button class="btn" size="small" round :loading="loading" @click="follow(item)">{{ item.likeFlag === 1 ? 'following' : '+follow' }}</van-button>
       </div>
       <div class="body">
         <h3 class="title van-ellipsis"></h3>
