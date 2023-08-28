@@ -9,44 +9,48 @@ const{loading, follow} = useFollow('knowledge')
 
 <template>
     <div class="knowledge-card van-hairline--bottom">
-      <div class="head">
-        <van-image
-          round
-          class="avatar"
-          :src="item.creatorAvatar"
-        ></van-image>
-        <div class="info">
-          <p class="name">GP: Jim</p>
-          <p class="dep van-ellipsis">work at Auckland Hospital</p>
-        </div>
-        <van-button class="btn" size="small" round :loading="loading" @click="follow(item)">{{ item.likeFlag === 1 ? 'following' : '+follow' }}</van-button>
-      </div>
-      <div class="body">
-        <h3 class="title van-ellipsis"></h3>
-        <p class="tag">
-          <span># health</span>
-          <span># food</span>
-        </p>
-        <p class="intro van-multi-ellipsis--l2">
-            Eating healthy starts with choosing whole, nutrient-rich foods and creating balanced meals. Focus on incorporating a variety of fresh vegetables, fruits, lean proteins, whole grains, and healthy fats into your diet. Aim for balanced portions that provide a mix of macronutrients (carbohydrates, proteins, and fats) to support your energy levels and overall well-being. Avoid highly processed and sugary foods, and opt for homemade meals whenever possible. Remember, small, sustainable changes in your eating habits can make a big difference over time.
-        </p>
-        <div class="imgs">
-          <van-image
-            src="https://yanxuan-item.nosdn.127.net/c1cdf62c5908659a9e4c8c2f9df218fd.png"
-          />
-          <van-image
-            src="https://yanxuan-item.nosdn.127.net/c1cdf62c5908659a9e4c8c2f9df218fd.png"
-          />
-          <van-image
-            src="https://yanxuan-item.nosdn.127.net/c1cdf62c5908659a9e4c8c2f9df218fd.png"
-          />
-        </div>
-        <p class="logs">
-          <span>10 like</span>
-          <span>50 comment</span>
+    <div class="head">
+      <van-image round class="avatar" :src="item.creatorAvatar"></van-image>
+      <div class="info">
+        <p class="name">Doctor Jim</p>
+        <p class="dep van-ellipsis">
+          Auckland Hopital
         </p>
       </div>
+      <van-button
+        class="btn"
+        size="small"
+        round
+        :loading="loading"
+        @click="follow(item)"
+      >
+        {{ item.likeFlag === 1 ? 'following' : '+ follow' }}
+      </van-button>
     </div>
+    <div class="body">
+      <h3 class="title van-ellipsis">
+        Weight Loss
+      </h3>
+      <p class="tag">
+        <span ># health</span>
+      </p>
+      <p class="intro van-multi-ellipsis--l2">
+        Losing weight involves adopting a balanced approach that combines healthy eating, regular physical activity, and sustainable lifestyle changes. Focus on consuming whole foods in appropriate portions, engaging in both cardiovascular exercises and strength training, managing stress, getting adequate sleep, and staying hydrated. Remember to set achievable goals, be patient with yourself, and seek professional guidance if needed, aiming for gradual and sustainable progress towards a healthier weight.
+      </p>
+      <!-- <div class="imgs" :class="{ large: item.coverUrl.length === 1 }">
+        <van-image
+          fit="cover"
+          v-for="(url, i) in item.coverUrl"
+          :key="i"
+          :src="url"
+        />
+      </div> -->
+      <p class="logs">
+        <span>{{ item.collectionNumber }} save</span>
+        <span>{{ item.commentNumber }} comment</span>
+      </p>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
