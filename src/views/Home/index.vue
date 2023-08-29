@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 import KnowledgeList from './components/KnowledgeList.vue'
 import FollowDoctor from './components/FollowDoctor.vue'
-// import { useConsultStore } from '@/stores'
-// import { ConsultType } from '@/enums'
+import { useConsultStore } from '@/stores'
+import { ConsultType } from '@/enums'
 
 const active = ref(1)
 
-// const store = useConsultStore()
+const store = useConsultStore()
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const active = ref(1)
           <router-link
             to="/consult/fast"
             class="nav"
-           
+            @click="store.setType(ConsultType.Fast)"
           >
             <cp-icon name="home-graphic"></cp-icon>
             <p class="title">Consultation</p>

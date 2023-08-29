@@ -24,6 +24,12 @@ const router = createRouter({
     
     },
     {
+      path:'/consult/fast',
+      component: ()=> import('@/views/Consult/ConsultFast.vue'),
+      meta: { title:'Express consultation' }
+    
+    },
+    {
       path:'/',
       redirect: '/home',
       component: ()=> import('@/views/Layout/index.vue'),
