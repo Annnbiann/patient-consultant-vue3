@@ -15,27 +15,34 @@ onMounted(async () => {
 const subDep = computed(() => allDep.value[active.value]?.child)
 
 const store = useConsultStore()
+const translationMap: Record<string, string>= {
+  '内科': 'Internal medicine',
+  '外科': 'Surgical',
+  '妇产科学': 'Obstetrics and Gynecology',
+  '儿科学': 'Pediatrics',
+  '骨外科': 'Orthopedics',
+  '眼科学': 'Ophthalmology',
+
+  
+};
+function tToE(chineseName: string): string {
+  return translationMap[chineseName] || chineseName;
+}
+
 </script>
+
 
 <template>
   <div class="consult-dep-page">
-    <cp-nav-bar title="选择科室" />
+    <cp-nav-bar title="Department" />
     <div class="wrapper">
       <van-sidebar v-model="active">
-        <van-sidebar-item
-          :title="item.name"
-          v-for="item in allDep"
-          :key="item.id"
-        />
+        <van-sidebar-item :title="tToE(item.name)" v-for="(item, index) in allDep.slice(0, 6)" :key="item.id"/>
+        
       </van-sidebar>
       <div class="sub-dep">
-        <router-link
-          v-for="sub in subDep"
-          :key="sub.id"
-          to="/consult/illness"
-          @click="store.setDep(sub.id)"
-          >{{ sub.name }}</router-link
-        >
+        <router-link v-for="(sub, index) in subDep.slice(0,1)" :key="sub.id" to="/consult/illness" @click="store.setDep(sub.id)">Specialist</router-link>
+        
       </div>
     </div>
   </div>
@@ -75,3 +82,6 @@ const store = useConsultStore()
   }
 }
 </style>
+
+
+

@@ -21,7 +21,7 @@ const store = useConsultStore()
         class="item"
         @click="store.setIllnessType(1)"
       >
-        <cp-icon class="pic" name="consult-doctor"></cp-icon>
+        <cp-icon class="pic" name="consult-doctor" ></cp-icon>
         <div class="info">
           <p>Doctor</p>
           <p></p>
