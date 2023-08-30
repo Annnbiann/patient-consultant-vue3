@@ -41,7 +41,7 @@ function tToE(chineseName: string): string {
         
       </van-sidebar>
       <div class="sub-dep">
-        <router-link v-for="(sub, index) in subDep.slice(0,1)" :key="sub.id" to="/consult/illness" @click="store.setDep(sub.id)">Specialist</router-link>
+        <router-link  to="/consult/illness" >Proceed</router-link>
         
       </div>
     </div>
