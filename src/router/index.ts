@@ -36,6 +36,12 @@ const router = createRouter({
     
     },
     {
+      path:'/consult/illness',
+      component: ()=> import('@/views/Consult/ConsultIllness.vue'),
+      meta: { title:'Discription' }
+    
+    },
+    {
       path:'/',
       redirect: '/home',
       component: ()=> import('@/views/Layout/index.vue'),
