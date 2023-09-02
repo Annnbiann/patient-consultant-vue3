@@ -11,7 +11,7 @@ import type {
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-// 病情描述对象
+// description
 const form = ref<ConsultIllness>({
   illnessDesc: '',
   illnessTime: undefined,
@@ -19,15 +19,15 @@ const form = ref<ConsultIllness>({
   pictures: []
 })
 
-// 上传图片
+// upload img
 const fileList = ref<Image[]>([])
-// 图片上传
+// upload after
 const onAfterRead: UploaderAfterRead = (item) => {
   if (Array.isArray(item)) return
   if (!item.file) return
 
   item.status = 'uploading'
-  item.message = '上传中...'
+  item.message = 'uploading...'
   uploadImage(item.file)
     .then((res) => {
       item.status = 'done'
@@ -100,7 +100,7 @@ onMounted(() => {
         </p>
       </div>
     </div>
-    <!-- 收集信息 -->
+    <!-- form info-->
     <div class="illness-form">
       <van-field
         type="textarea"
@@ -116,11 +116,11 @@ onMounted(() => {
         <p>Have you sought medical attention for this condition at a hospital？</p>
         <cp-radio-btn :options="flagOptions" v-model="form.consultFlag" />
       </div>
-      <!-- 上传组件 -->
+      <!-- uplaod img -->
       <div class="illness-img">
         <van-uploader
           upload-icon="photo-o"
-          upload-text="上传图片"
+          upload-text="Upload image"
           max-count="9"
           :max-size="5 * 1024 * 1024"
           v-model="fileList"
