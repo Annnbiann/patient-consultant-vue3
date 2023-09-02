@@ -33,12 +33,12 @@ const onAfterRead: UploaderAfterRead = (item) => {
       item.status = 'done'
       item.message = undefined
       item.url = res.data.url
-      // 同步数据
+      // data
       form.value.pictures?.push(res.data)
     })
     .catch(() => {
       item.status = 'failed'
-      item.message = '上传失败'
+      item.message = 'failed'
     })
 }
 const onDeleteImg = (item: UploaderFileListItem) => {
@@ -46,7 +46,7 @@ const onDeleteImg = (item: UploaderFileListItem) => {
     (pic) => pic.url !== item.url
   )
 }
-
+// button activate
 const disabled = computed(
   () =>
     !form.value.illnessDesc ||
@@ -57,17 +57,17 @@ const disabled = computed(
 const store = useConsultStore()
 const router = useRouter()
 const next = () => {
-  if (!form.value.illnessDesc) return showToast('Please enter a description of the medical condition.')
+  if (!form.value.illnessDesc) return showToast('Please enter the description of the medical condition.')
   if (form.value.illnessTime === undefined)
     return showToast('Please select the duration of the symptoms.')
   if (form.value.consultFlag === undefined) return showToast('Please select whether you have sought medical attention.')
-  // 记录病情
+  // record data
   store.setIllness(form.value)
-  // 跳转，携带标识
+  // jump , select patient
   router.push('/user/patient?isChange=1')
 }
 
-// 数据的回显
+// rettrive the data
 onMounted(() => {
   if (store.consult.illnessDesc) {
     showConfirmDialog({
@@ -75,7 +75,7 @@ onMounted(() => {
       message: 'Would you like to retrieve the previously entered medical information？',
       closeOnPopstate: false
     }).then(() => {
-      // 回显数据
+      // data
       const { illnessDesc, illnessTime, consultFlag, pictures } = store.consult
       form.value = { illnessDesc, illnessTime, consultFlag, pictures }
       fileList.value = pictures || []
@@ -131,7 +131,7 @@ onMounted(() => {
           The uploaded content is for doctors' use only. Up to 9 images can be uploaded, with a maximum size of 5MB each
         </p>
       </div>
-      <!-- 下一步 -->
+      <!-- next button -->
       <van-button
         @click="next"
         :class="{ disabled }"

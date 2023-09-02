@@ -149,8 +149,8 @@ type ConsultIllness = Pick<
   PartialConsult,
   'illnessDesc' | 'illnessTime' | 'consultFlag' | 'pictures'
 >
-
-// 问诊订单预支付传参
+// payment
+// param
 export type ConsultOrderPreParams = Pick<PartialConsult, 'type' | 'illnessType'>
 
 // 问诊订单预支付信息

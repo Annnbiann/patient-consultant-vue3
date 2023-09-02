@@ -42,6 +42,12 @@ const router = createRouter({
     
     },
     {
+      path:'/consult/pay',
+      component: ()=> import('@/views/Consult/ConsultPay.vue'),
+      meta: { title:'Payment' }
+    
+    },
+    {
       path:'/',
       redirect: '/home',
       component: ()=> import('@/views/Layout/index.vue'),

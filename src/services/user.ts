@@ -3,7 +3,8 @@ import type {
     Patient,
     PatientList,
     User,
-    UserInfo
+    UserInfo,
+    
   } from '@/types/user'
   import { request } from '@/utils/request'
   
@@ -57,4 +58,7 @@ import type {
     code: string
     openId: string
   }) => request<User>('login/binding', 'POST', data)
+
+
+
   

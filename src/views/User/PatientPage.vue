@@ -15,7 +15,7 @@ import {
   type FormInstance
 } from 'vant'
 import { useRoute } from 'vue-router'
-//import { useConsultStore } from '@/stores'
+import { useConsultStore } from '@/stores'
 import router from '@/router'
 
 // get 
@@ -107,10 +107,10 @@ const remove = async () => {
   }
 }
 
-// 
+// for consulation form
 const route = useRoute()
 const isChange = computed(() => route.query.isChange === '1')
-// 
+// select patient
 const patientId = ref<string>()
 const selectedPatient = (item: Patient) => {
   if (isChange.value) {
@@ -119,27 +119,42 @@ const selectedPatient = (item: Patient) => {
 }
 
 // next
-// const store = useConsultStore()
-// const next = () => {
-//   if (!patientId.value) return showToast('select')
-//   store.setPatient(patientId.value)
-//   router.push('/consult/pay')
-// }
+const store = useConsultStore()
+const next = () => {
+  if (!patientId.value) return showToast('select patient')
+  store.setPatient(patientId.value)
+  router.push('/consult/pay')
+}
 </script>
 
 
 <template>
   <div class="patient-page">
-    <cp-nav-bar title="Family Record"></cp-nav-bar>
+    <cp-nav-bar :title="isChange?'Select Patient':'Family Record'"></cp-nav-bar>
+        <!-- head for select patient -->
+        <div class="patient-change" v-if="isChange">
+      <h3>Please select patient profile</h3>
+      <p>Only for consultation</p>
+    </div>
+
+
+    
+
     <div class="patient-list">
-      <div class="patient-item" v-for="item in list" :key="item.id">
+      <div 
+      class="patient-item" 
+      v-for="item in list" 
+      :key="item.id" 
+      @click="selectedPatient(item)"
+      :class="{selected:patientId === item.id}"
+      >
         <div class="info">
           <span class="name">{{item.name}}</span>
           <span class="id">{{ item.idCard.replace(/^(.{6}).+(.{4})$/, '$1********$2') }}</span>
           <span>{{ item.genderValue === "男" ? "male" : item.genderValue === "女" ? "female" : item.genderValue }}</span>
           <span>{{ item.age }}</span>
         </div>
-        <div class="icon" @click="showPopup(item)"><cp-icon name="user-edit" /></div>
+        <div class="icon" @click.stop="showPopup(item)"><cp-icon name="user-edit" /></div>
         <div class="tag" v-if="item.defaultFlag ===1">default</div>
       </div>
     
@@ -151,11 +166,11 @@ const selectedPatient = (item: Patient) => {
     </div>
 
 
-    <!-- popup -->
-    <!-- <div class="patient-next" @click="next" v-if="isChange">
-      <van-button type="primary" round block>下一步</van-button>
-    </div> -->
-    <!-- 使用 popup 组件 -->
+    <!-- bottom for select page -->
+    <div class="patient-next" @click="next" v-if="isChange">
+      <van-button type="primary" round block>Next</van-button>
+    </div>
+    <!--popup  -->
     <van-popup position="right" v-model:show="show">
       <cp-nav-bar
         :title="patient.id ? 'Edit' : 'Add'"
