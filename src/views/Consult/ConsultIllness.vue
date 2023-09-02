@@ -57,10 +57,10 @@ const disabled = computed(
 const store = useConsultStore()
 const router = useRouter()
 const next = () => {
-  if (!form.value.illnessDesc) return showToast('请输入病情描述')
+  if (!form.value.illnessDesc) return showToast('Please enter a description of the medical condition.')
   if (form.value.illnessTime === undefined)
-    return showToast('请选择症状的持续时间')
-  if (form.value.consultFlag === undefined) return showToast('请选择是否就诊过')
+    return showToast('Please select the duration of the symptoms.')
+  if (form.value.consultFlag === undefined) return showToast('Please select whether you have sought medical attention.')
   // 记录病情
   store.setIllness(form.value)
   // 跳转，携带标识
@@ -71,8 +71,8 @@ const next = () => {
 onMounted(() => {
   if (store.consult.illnessDesc) {
     showConfirmDialog({
-      title: '温馨提示',
-      message: '是否恢复之前填写的病情信息？',
+      title: 'Alert',
+      message: 'Would you like to retrieve the previously entered medical information？',
       closeOnPopstate: false
     }).then(() => {
       // 回显数据
@@ -86,17 +86,17 @@ onMounted(() => {
 
 <template>
   <div class="consult-illness-page">
-    <cp-nav-bar title="图文问诊" />
+    <cp-nav-bar title="Consultation" />
     <!-- 医生提示 -->
     <div class="illness-tip van-hairline--bottom">
       <img class="img" src="@/assets/avatar-doctor.svg" />
       <div class="info">
-        <p class="tit">在线医生</p>
+        <p class="tit">Doctor Online</p>
         <p class="tip">
-          请描述你的疾病或症状、是否用药、就诊经历，需要我听过什么样的帮助
+          Please describe your symptoms, medical history.
         </p>
         <p class="safe">
-          <cp-icon name="consult-safe" /><span>内容仅医生可见</span>
+          <cp-icon name="consult-safe" /><span>For doctor only</span>
         </p>
       </div>
     </div>
@@ -105,15 +105,15 @@ onMounted(() => {
       <van-field
         type="textarea"
         rows="3"
-        placeholder="请详细描述您的病情，病情描述不能为空"
+        placeholder="Please provide a detailed description of your medical condition. "
         v-model="form.illnessDesc"
       ></van-field>
       <div class="item">
-        <p>本次患病多久了？</p>
+        <p>How long the symptom last？</p>
         <cp-radio-btn :options="timeOptions" v-model="form.illnessTime" />
       </div>
       <div class="item">
-        <p>此次病情是否去医院就诊过？</p>
+        <p>Have you sought medical attention for this condition at a hospital？</p>
         <cp-radio-btn :options="flagOptions" v-model="form.consultFlag" />
       </div>
       <!-- 上传组件 -->
@@ -128,7 +128,7 @@ onMounted(() => {
           @delete="onDeleteImg"
         ></van-uploader>
         <p class="tip" v-if="!fileList.length">
-          上传内容仅医生可见,最多9张图,最大5MB
+          The uploaded content is for doctors' use only. Up to 9 images can be uploaded, with a maximum size of 5MB each
         </p>
       </div>
       <!-- 下一步 -->
@@ -139,7 +139,7 @@ onMounted(() => {
         block
         round
       >
-        下一步
+        Next
       </van-button>
     </div>
   </div>
