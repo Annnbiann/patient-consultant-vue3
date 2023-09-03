@@ -5,6 +5,7 @@ import { useConsultStore } from '@/stores'
 import type { ConsultOrderPreData } from '@/types/consult'
 import type { Patient } from '@/types/user'
 import { onMounted, ref } from 'vue'
+import { showConfirmDialog, showDialog, showToast } from 'vant'
 
 const store = useConsultStore()
 
@@ -33,6 +34,15 @@ onMounted(() => {
 })
 
 const agree = ref(false)
+
+const show = ref(false)
+const paymentMethod = ref<0 | 1>()
+const submit = async () => {
+  if (!agree.value) return showToast('Please read and tick the payment policy.')
+  // 打开
+  show.value = true
+}
+
 </script>
 
 <template>
@@ -65,8 +75,27 @@ const agree = ref(false)
     <van-submit-bar
       button-type="primary"
       button-text="Pay Now"
-      
+      @click="submit"
     />
+    <van-action-sheet v-model:show="show" title="Select payment method">
+      <div class="pay-type">
+        <p class="amount">${{ payInfo.actualPayment.toFixed(2) }}</p>
+        <van-cell-group>
+          <van-cell title="Credit card" @click="paymentMethod = 0">
+            <template #icon><cp-icon name="consult-credit" /></template>
+            <template #extra><van-checkbox :checked="paymentMethod === 0" /></template>
+          </van-cell>
+          <van-cell title="Alipay" @click="paymentMethod = 1">
+            <template #icon><cp-icon name="consult-alipay" /></template>
+            <template #extra><van-checkbox :checked="paymentMethod === 1" /></template>
+          </van-cell>
+        </van-cell-group>
+        <div class="btn">
+          <van-button type="primary" round block>Pay</van-button>
+        </div>
+      </div>
+    </van-action-sheet>
+
    
   </div>
   <div class="consult-pay-page" v-else>
