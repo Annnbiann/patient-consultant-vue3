@@ -52,22 +52,19 @@ const onLogout = async () => {
         </div>
       </div>
       <van-row>
-        <van-col span="6">
+        <van-col span="8">
           <p>{{ user?.collectionNumber }}</p>
           <p>Like</p>
         </van-col>
-        <van-col span="6">
+        <van-col span="8">
           <p>{{ user?.likeNumber }}</p>
           <p>Follow</p>
         </van-col>
-        <van-col span="6">
+        <van-col span="8">
           <p>{{ user?.score }}</p>
           <p>Points</p>
         </van-col>
-        <van-col span="6">
-          <p>{{ user?.couponNumber }}</p>
-          <p>Coupons</p>
-        </van-col>
+        
       </van-row>
     </div>
     <div class="user-page-order">

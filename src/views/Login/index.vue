@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useMobileCode } from '@/composables'
+// import { useMobileCode } from '@/composables'
 import { loginByMobile, loginByPassword } from '@/services/user'
 import { codeRules, mobileRules, passwordRules } from '@/utils/rules'
 import { showSuccessToast, showToast } from 'vant'

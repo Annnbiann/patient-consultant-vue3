@@ -73,6 +73,8 @@ onMounted(() => {
     showConfirmDialog({
       title: 'Alert',
       message: 'Would you like to retrieve the previously entered medical information？',
+      confirmButtonText: 'Yes', 
+      cancelButtonText: 'No',
       closeOnPopstate: false
     }).then(() => {
       // data

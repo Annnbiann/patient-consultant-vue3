@@ -37,38 +37,40 @@ const agree = ref(false)
 
 <template>
   <div class="consult-pay-page" v-if="payInfo && patient">
-    <cp-nav-bar title="支付" />
+    <cp-nav-bar title="Payment" />
     <div class="pay-info">
-      <p class="tit">图文问诊 {{ payInfo.payment }} 元</p>
+      <p class="tit">Consultation {{ payInfo.payment }}$ </p>
       <img class="img" src="@/assets/avatar-doctor.svg" />
       <p class="desc">
-        <span>极速问诊</span>
-        <span>自动分配医生</span>
+        <span>Express consultation</span>
+        <span></span>
       </p>
     </div>
     <van-cell-group>
-      <van-cell title="优惠券" :value="`-¥${payInfo.couponDeduction}`" />
-      <van-cell title="积分抵扣" :value="`-¥${payInfo.pointDeduction}`" />
-      <van-cell title="实付款" :value="`¥${payInfo.actualPayment}`" class="pay-price" />
+      <!-- <van-cell title="coupon" :value="`-$${payInfo.couponDeduction}`" />
+      <van-cell title="credit point" :value="`-$${payInfo.pointDeduction}`" /> -->
+      <van-cell title="total" :value="`$${payInfo.actualPayment}`" class="pay-price" />
     </van-cell-group>
     <div class="pay-space"></div>
     <van-cell-group>
       <van-cell
-        title="患者信息"
-        :value="`${patient.name} | ${patient.genderValue} | ${patient.age}岁`"
+        title="patient information"
+        :value="`${patient.name} | age:${patient.age}`"
       ></van-cell>
-      <van-cell title="病情描述" :label="store.consult.illnessDesc"></van-cell>
+      <van-cell title="Detail" :label="store.consult.illnessDesc"></van-cell>
     </van-cell-group>
     <div class="pay-schema">
-      <van-checkbox v-model="agree">我已同意 <span class="text">支付协议</span></van-checkbox>
+      <van-checkbox v-model="agree">I agree on <span class="text">payment policy</span></van-checkbox>
     </div>
     <van-submit-bar
       button-type="primary"
-      :price="payInfo.actualPayment * 100"
-      button-text="立即支付"
-      text-align="left"
+      button-text="Pay Now"
+      
     />
+   
   </div>
+  <div class="consult-pay-page" v-else>
+    <van-skeleton title :row="10" style="margin-top: 18px;"/></div>
 </template>
 
 
@@ -132,7 +134,8 @@ const agree = ref(false)
 ::v-deep() {
   .van-submit-bar__button {
     font-weight: normal;
-    width: 160px;
+    width: 360px;
+    
   }
 }
 .pay-type {
