@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { getConsultOrderPre } from '@/services/consult'
+import { createConsultOrder, getConsultOrderPre } from '@/services/consult'
 import { getPatientDetail } from '@/services/user'
 import { useConsultStore } from '@/stores'
-import type { ConsultOrderPreData } from '@/types/consult'
+import type { ConsultOrderPreData, PartialConsult } from '@/types/consult'
 import type { Patient } from '@/types/user'
-import { onMounted, ref } from 'vue'
 import { showConfirmDialog, showDialog, showToast } from 'vant'
-
+import { onMounted, ref } from 'vue'
+import { onBeforeRouteLeave, useRouter } from 'vue-router'
 const store = useConsultStore()
 
 const payInfo = ref<ConsultOrderPreData>()
@@ -37,12 +37,44 @@ const agree = ref(false)
 
 const show = ref(false)
 const paymentMethod = ref<0 | 1>()
+const loading = ref(false)
+const orderId = ref('')
 const submit = async () => {
   if (!agree.value) return showToast('Please read and tick the payment policy.')
+  loading.value = true
+  //send order request
+  const res = await createConsultOrder(store.consult)
+  loading.value = false
+  store.clear()
+  orderId.value = res.data.id
+
   // 打开
   show.value = true
 }
 
+// 用户引导
+onBeforeRouteLeave(() => {
+  if (orderId.value) return false
+})
+
+
+const router = useRouter()
+const onClose = () => {
+  return showConfirmDialog({
+    title: 'Attention',
+    message: 'Do you want to leave the payment page？',
+    cancelButtonText: 'Yes',
+    confirmButtonText: 'No'
+  })
+    .then(() => {
+      return false
+    })
+    .catch(() => {
+      orderId.value = ''
+      router.push('/user/consult')
+      return true
+    })
+}
 </script>
 
 <template>
@@ -76,8 +108,15 @@ const submit = async () => {
       button-type="primary"
       button-text="Pay Now"
       @click="submit"
+      :loading="loading"
     />
-    <van-action-sheet v-model:show="show" title="Select payment method">
+    <van-action-sheet 
+    v-model:show="show" 
+    title="Select payment method"
+    :close-on-click-popstate="false"
+    :closeable="false"
+    :before-close="onClose"
+    >
       <div class="pay-type">
         <p class="amount">${{ payInfo.actualPayment.toFixed(2) }}</p>
         <van-cell-group>
