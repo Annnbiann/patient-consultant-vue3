@@ -28,7 +28,33 @@ const loadPatient = async () => {
   patient.value = res.data
 }
 
+
+type Key = keyof PartialConsult
 onMounted(() => {
+  // 生成订单需要的信息不完整的时候需要提示
+  const validKeys: Key[] = [
+    'type',
+    'illnessType',
+    'depId',
+    'illnessDesc',
+    'illnessTime',
+    'consultFlag',
+    'patientId'
+  ]
+  const valid = validKeys.every((key) => store.consult[key] !== undefined)
+  if (!valid) {
+    return showDialog({
+      title: 'Attention',
+      message:
+        'Incomplete information.  You can pay for pending medical consultations in your consultation records.！',
+      
+      closeOnPopstate: false,
+      confirmButtonText: 'Confirm'
+
+    }).then(() => {
+      router.push('/')
+    })
+  }
   loadData()
   loadPatient()
 })
