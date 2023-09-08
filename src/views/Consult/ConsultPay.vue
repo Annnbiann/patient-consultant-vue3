@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { createConsultOrder, getConsultOrderPre } from '@/services/consult'
+import { createConsultOrder, getConsultOrderPre,getConsultOrderPayUrl } from '@/services/consult'
 import { getPatientDetail } from '@/services/user'
 import { useConsultStore } from '@/stores'
 import type { ConsultOrderPreData, PartialConsult } from '@/types/consult'
 import type { Patient } from '@/types/user'
-import { showConfirmDialog, showDialog, showToast } from 'vant'
+import { showConfirmDialog, showDialog, showToast,showLoadingToast } from 'vant'
 import { onMounted, ref } from 'vue'
 import { onBeforeRouteLeave, useRouter } from 'vue-router'
 const store = useConsultStore()
@@ -35,7 +35,7 @@ onMounted(() => {
   const validKeys: Key[] = [
     'type',
     'illnessType',
-    'depId',
+    
     'illnessDesc',
     'illnessTime',
     'consultFlag',
@@ -101,6 +101,19 @@ const onClose = () => {
       return true
     })
 }
+
+// 跳转支付
+const pay = async () => {
+  if (paymentMethod.value === undefined) return showToast('Please select payment method')
+  // showLoadingToast({ message: 'redirecting', duration: 0 })
+  // const res = await getConsultOrderPayUrl({
+  //   orderId: orderId.value,
+  //   paymentMethod: paymentMethod.value,
+  //   payCallback: 'http://localhost:5173/room'
+  // })
+  // window.location.href = res.data.payUrl
+}
+
 </script>
 
 <template>
@@ -156,7 +169,7 @@ const onClose = () => {
           </van-cell>
         </van-cell-group>
         <div class="btn">
-          <van-button type="primary" round block>Pay</van-button>
+          <van-button @click="pay" type="primary" round block>Pay</van-button>
         </div>
       </div>
     </van-action-sheet>
