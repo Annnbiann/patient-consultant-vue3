@@ -15,7 +15,7 @@ import { getConsultOrderDetail } from '@/services/consult'
 import dayjs from 'dayjs'
 import { showToast } from 'vant'
 
-// const socket = io('http://localhost:3000')
+
 const consult = ref<ConsultOrderItem>()
 const loadConsult = async () => {
   const res = await getConsultOrderDetail(route.query.orderId as string)
