@@ -12,7 +12,7 @@ import { MsgType, OrderType } from '@/enums'
 import { ref, nextTick, provide } from 'vue'
 import type { ConsultOrderItem, Image } from '@/types/consult'
 import { getConsultOrderDetail } from '@/services/consult'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 import { showToast } from 'vant'
 
 
