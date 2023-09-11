@@ -129,7 +129,7 @@ const onSendImage = (image: Image) => {
 
 // 下拉刷新
 const loading = ref(false)
-const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+// const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'))
 const onRefresh = () => {
   socket.emit('getChatMsgList', 20, time.value, consult.value?.id)
 }

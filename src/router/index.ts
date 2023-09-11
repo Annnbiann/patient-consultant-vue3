@@ -52,7 +52,7 @@ const router = createRouter({
       component: () => import('@/views/Room/index.vue'),
       meta: { title: '问诊室' },
       beforeEnter(to) {
-        if (to.query.payResult === 'false') return '/user/consult'
+        if (to.query.payResult === 'false') return '@/views/Room/index.vue'
       }
     },
     {
