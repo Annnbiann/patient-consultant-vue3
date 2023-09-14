@@ -102,13 +102,19 @@ const onClose = () => {
     })
 }
 
+
 // 跳转支付
 const pay = async () => {
   if (paymentMethod.value === undefined) return showToast('Please select payment method')
   showLoadingToast({ message: 'redirecting', duration: 0 })
-  
-  window.location.href = 'http://localhost:5173/room'
+  const res = await getConsultOrderPayUrl({
+    orderId: orderId.value,
+    paymentMethod: paymentMethod.value,
+    payCallback: 'http://localhost:5173/room'
+  })
+   window.location.href = 'http://localhost:5173/room';
 }
+
 
 </script>
 
