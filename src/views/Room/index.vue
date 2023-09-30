@@ -59,7 +59,7 @@ onMounted(async () => {
 
 <template>
   <div class="room-page">
-    <cp-nav-bar title="问诊室" />
+    <cp-nav-bar title="Consultation Room" />
     <room-status></room-status>
     <room-message></room-message>
     <room-action></room-action>
