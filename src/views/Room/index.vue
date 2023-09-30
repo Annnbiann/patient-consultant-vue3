@@ -53,7 +53,7 @@ onMounted(async () => {
   
  
     // 聊天记录
-    socket.on('chatMsgList', ({ data }: { data: TimeMessages[] }) => {
+  socket.on('chatMsgList', ({ data }: { data: TimeMessages[] }) => {
     // 准备转换常规消息列表
     const arr: Message[] = []
     data.forEach((item, i) => {
@@ -72,9 +72,9 @@ onMounted(async () => {
 
 })
 
-onUnmounted(() => {
-  socket.close()
-})
+// onUnmounted(() => {
+//   socket.close()
+// })
 
 
 
