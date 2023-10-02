@@ -6,7 +6,7 @@
       type="text"
       class="input"
       :border="false"
-      placeholder="Ask Doctor"
+      placeholder="Ask Doctor "
       autocomplete="off"
       :disabled="true"
     ></van-field>

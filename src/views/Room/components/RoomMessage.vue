@@ -5,48 +5,49 @@ import { MsgType, PrescriptionStatus } from '@/enums'
 import { useUserStore } from '@/stores'
 import type { Image } from '@/types/consult'
 import type { Message, Prescription } from '@/types/room'
-import { getConsultFlagText, getIllnessTimeText } from '@/utils/filter'
+// import { getConsultFlagText, getIllnessTimeText } from '@/utils/filter'
 // import dayjs from 'dayjs'
-import { showImagePreview, showToast } from 'vant'
+// import { showImagePreview, showToast } from 'vant'
 // import EvaluateCard from './EvaluateCard.vue'
-import { useRouter } from 'vue-router'
-defineProps<{
-  item: Message
-}>()
+// import { useRouter } from 'vue-router'
+
+// defineProps<{
+//   item: Message
+// }>()
 
 // 预览图片
-const onPreviewImage = (images?: Image[]) => {
-  if (images && images.length) showImagePreview(images.map((item) => item.url))
-  else showToast('暂无图片')
-}
+// const onPreviewImage = (images?: Image[]) => {
+//   if (images && images.length) showImagePreview(images.map((item) => item.url))
+//   else showToast('暂无图片')
+// }
 
 </script>
 
 <template>
   <!-- 患者卡片 -->
-  <div class="msg msg-illness" v-if="item.msgType === MsgType.CardPat">
+  <div class="msg msg-illness" >
     <div class="patient van-hairline--bottom">
-      <p>{{ item.msg.consultRecord?.patientInfo.name }}
+      <!-- <p>{{ item.msg.consultRecord?.patientInfo.name }}
         {{ item.msg.consultRecord?.patientInfo.genderValue }}
-        age:{{ item.msg.consultRecord?.patientInfo.age }}</p>
-      <p v-if="item.msg.consultRecord">
-        {{ getIllnessTimeText(item.msg.consultRecord?.illnessTime) }} |
-        {{ getConsultFlagText(item.msg.consultRecord?.consultFlag) }}
+        age:{{ item.msg.consultRecord?.patientInfo.age }}</p> -->
+      <p >
+        <!-- {{ getIllnessTimeText(item.msg.consultRecord?.illnessTime) }} |
+        {{ getConsultFlagText(item.msg.consultRecord?.consultFlag) }} -->
       </p>
     </div>
     <van-row>
       <van-col span="6">病情描述</van-col>
-      <van-col span="18">{{ item.msg.consultRecord?.illnessDesc }}</van-col>
+      <van-col span="18"></van-col>
       <van-col span="6">图片</van-col>
-      <van-col span="18" @click="onPreviewImage(item.msg.consultRecord?.pictures)">点击查看</van-col>
+      <!-- <van-col span="18" @click="onPreviewImage(item.msg.consultRecord?.pictures)">点击查看</van-col> -->
     </van-row>
   </div>
   <!-- 通知-通用 -->
-  <!-- <div class="msg msg-tip">
+  <div class="msg msg-tip">
     <div class="content">
-      <span>医护人员正在赶来，请耐心等候</span>
+      <span>The doctor is coming...</span>
     </div>
-  </div> -->
+  </div>
   <!-- 通知-温馨提示 -->
   <!-- <div class="msg msg-tip">
     <div class="content">
