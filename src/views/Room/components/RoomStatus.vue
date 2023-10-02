@@ -1,13 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { OrderType } from '@/enums'
+
+// defineProps<{
+//   status?: OrderType
+//   countdown?: number
+// }>()
+</script>
 
 <template>
   <div class="room-status">
     <div class="wait"> The doctor is assigned for a prompt appointment.</div>
-    <!-- <div class="chat">
-      <span>咨询中</span>
-      <span>剩余时间：23:10:34</span>
-    </div> -->
-    <!-- <div class="end"><van-icon name="passed" /> 已结束</div> -->
+    <div  class="chat">
+      <span></span>
+      <span>
+        
+      </span>
+    </div>
+    <div
+      class="end"
+    >
+      
+    </div>
   </div>
 </template>
 

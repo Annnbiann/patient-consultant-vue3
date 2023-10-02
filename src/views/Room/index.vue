@@ -16,11 +16,11 @@ import { getConsultOrderDetail } from '@/services/consult'
 import { showToast } from 'vant'
 
 
-const consult = ref<ConsultOrderItem>()
-  const loadConsult = async () => {
-  const res = await getConsultOrderDetail(route.query.orderId as string)
-  consult.value = res.data
-}
+// const consult = ref<ConsultOrderItem>()
+//   const loadConsult = async () => {
+//   const res = await getConsultOrderDetail(route.query.orderId as string)
+//   consult.value = res.data
+// }
 
 const store = useUserStore()
 const route = useRoute()
@@ -30,7 +30,7 @@ const list = ref<Message[]>([])
 let socket: Socket
 
 onMounted(async () => {
-  loadConsult()
+  // loadConsult()
   // 建立链接，创建 socket.io 实例
   socket = io(baseURL, {
     auth: {
@@ -76,14 +76,43 @@ onMounted(async () => {
 
 
   // 监听订单状态变化
-  socket.on('statusChange', () => loadConsult())
+  // socket.on('statusChange', () => loadConsult())
+  // 接收聊天消息
+  socket.on('receiveChatMsg', async (event) => {
+    socket.emit('updateMsgStatus', event.id)
+    list.value.push(event)
+    await nextTick()
+    window.scrollTo(0, document.body.scrollHeight)
+  })
 })
 
 onUnmounted(() => {
   socket.close()
 })
 
+// 发送文字信息
+const onSendText = (text: string) => {
+  socket.emit('sendChatMsg', {
+    from: store.user?.id,
+    // to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgText,
+    msg: {
+      content: text
+    }
+  })
+}
 
+// 发送图片信息
+const onSendImage = (image: Image) => {
+  socket.emit('sendChatMsg', {
+    from: store.user?.id,
+    // to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgImage,
+    msg: {
+      picture: image
+    }
+  })
+}
 
 
 
@@ -94,7 +123,10 @@ onUnmounted(() => {
     <cp-nav-bar title="Consultation Room" />
     <room-status></room-status>
     <room-message></room-message>
-    <room-action></room-action>
+    <room-action
+    @send-text="onSendText"
+    @send-image="onSendImage"
+    ></room-action>
   </div>
 </template>
 

@@ -27,20 +27,17 @@ import type { Message, Prescription } from '@/types/room'
   <!-- 患者卡片 -->
   <div class="msg msg-illness" >
     <div class="patient van-hairline--bottom">
-      <!-- <p>{{ item.msg.consultRecord?.patientInfo.name }}
-        {{ item.msg.consultRecord?.patientInfo.genderValue }}
-        age:{{ item.msg.consultRecord?.patientInfo.age }}</p> -->
+      <p>Heare mai!</p>
       <p >
-        <!-- {{ getIllnessTimeText(item.msg.consultRecord?.illnessTime) }} |
-        {{ getConsultFlagText(item.msg.consultRecord?.consultFlag) }} -->
+        Thanks for your patience.
       </p>
     </div>
-    <van-row>
-      <van-col span="6">病情描述</van-col>
+    <!-- <van-row>
+      <van-col span="6"></van-col>
       <van-col span="18"></van-col>
-      <van-col span="6">图片</van-col>
-      <!-- <van-col span="18" @click="onPreviewImage(item.msg.consultRecord?.pictures)">点击查看</van-col> -->
-    </van-row>
+      <van-col span="6"></van-col>
+      <van-col span="18" @click="onPreviewImage(item.msg.consultRecord?.pictures)">点击查看</van-col>
+    </van-row> -->
   </div>
   <!-- 通知-通用 -->
   <div class="msg msg-tip">
@@ -62,13 +59,13 @@ import type { Message, Prescription } from '@/types/room'
     </div>
   </div> -->
   <!-- 发送文字 -->
-    <!-- <div class="msg msg-to">
+    <div class="msg msg-to">
     <div class="content">
-      <div class="time">20:12</div>
-      <div class="pao">大夫你好？</div>
+      <div class="time">20:10</div>
+      <div class="pao">Kia ora</div>
     </div>
     <van-image src="https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/popular_3.jpg" />
-  </div> -->
+  </div>
   <!-- 发送图片 -->
   <!-- <div class="msg msg-to">
     <div class="content">
@@ -81,13 +78,13 @@ import type { Message, Prescription } from '@/types/room'
     <van-image src="https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/popular_3.jpg" />
   </div> -->
   <!-- 接收文字 -->
-  <!-- <div class="msg msg-from">
+  <div class="msg msg-from">
     <van-image src="https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/popular_3.jpg" />
     <div class="content">
       <div class="time">20:12</div>
-      <div class="pao">哪里不舒服</div>
+      <div class="pao">Kia ora, can you tell me more details?</div>
     </div>
-  </div> -->
+  </div>
   <!-- 接收图片 -->
   <!-- <div class="msg msg-from">
     <van-image src="https://yjy-oss-files.oss-cn-zhangjiakou.aliyuncs.com/tuxian/popular_3.jpg" />
