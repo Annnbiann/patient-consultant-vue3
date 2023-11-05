@@ -40,7 +40,7 @@ const isShow = ref(false)
     <div class="login-head">
       <h3>Kia ora</h3>
       <a href="javascript:;">
-        <span>Message login</span>
+        
         <van-icon name="arrow"></van-icon>
       </a>
     </div>
