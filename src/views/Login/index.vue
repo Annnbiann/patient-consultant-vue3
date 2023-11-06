@@ -32,10 +32,10 @@ const isShow = ref(false)
 
 <template>
   <div class="login-page">
-    <cp-nav-bar
+    <!-- <cp-nav-bar
       right-text="register"
       @click-right="$router.push('/register')"
-    ></cp-nav-bar>
+    ></cp-nav-bar> -->
     <!-- 头部 -->
     <div class="login-head">
       <h3>Kia ora</h3>
